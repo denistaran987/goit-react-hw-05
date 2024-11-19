@@ -1,0 +1,15 @@
+.nav {
+  display: flex;
+  column-gap: 10px;
+}
+
+.link {
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: inherit;
+}
+
+.active {
+  color: #6699ff;
+}
