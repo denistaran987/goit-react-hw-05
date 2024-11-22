@@ -3,36 +3,21 @@ import AppBar from './AppBar/AppBar';
 import HomePage from '../pages/HomePage';
 import MoviesPage from '../pages/MoviesPage';
 import NotFoundPage from '../pages/NotFoundPage';
-import { useEffect, useState } from 'react';
-import { fetchTrendingMovies } from '../services/api';
+import MovieDetailsPage from '../pages/MovieDetailsPage';
+import MovieCast from './MovieCast/MovieCast';
+import MovieReviews from './MovieReviews/MovieReviews';
 
 function App() {
-  const [movies, setMovies] = useState([]);
-
-  useEffect(() => {
-    try {
-      const getData = async () => {
-        const { results } = await fetchTrendingMovies();
-        setMovies(results);
-      };
-
-      getData();
-    } catch (error) {
-      console.log(error.message);
-    }
-  }, []);
-
-  if (movies.length === 0) {
-    return <p>Loading...</p>;
-  }
-
   return (
     <div>
       <AppBar />
-
       <Routes>
-        <Route path="/" element={<HomePage movies={movies} />} />
+        <Route path="/" element={<HomePage />} />
         <Route path="/movies" element={<MoviesPage />} />
+        <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+          <Route path="/movies/:movieId/cast" element={<MovieCast />} />
+          <Route path="/movies/:movieId/reviews" element={<MovieReviews />} />
+        </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

@@ -1,21 +1,19 @@
 import { Link } from 'react-router-dom';
 import s from './MovieList.module.css';
 
-const MoveList = ({ movies }) => {
+const MovieList = ({ movies }) => {
   return (
-    <div>
-      <ul>
-        {movies.map(movie => {
-          return (
-            <li key={movie.id}>
-              <Link className={s.link} to="/movies">
-                {movie.title}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <ul>
+      {movies.map(movie => {
+        return (
+          <li key={movie.id}>
+            <Link className={s.link} to={`/movies/${movie.id.toString()}`}>
+              {movie.title}
+            </Link>
+          </li>
+        );
+      })}
+    </ul>
   );
 };
-export default MoveList;
+export default MovieList;

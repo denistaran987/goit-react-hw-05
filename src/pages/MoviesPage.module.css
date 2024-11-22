@@ -1,0 +1,35 @@
+.form {
+  display: flex;
+  align-items: center;
+  column-gap: 10px;
+  margin-bottom: 10px;
+}
+
+.field {
+  height: 36px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid lightgray;
+  outline: none;
+  transition: border 0.3s ease-in-out;
+}
+
+.field:hover {
+  border: 1px solid #6699ff;
+}
+
+.button {
+  padding-inline: 16px;
+  height: 36px;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  background-color: #6699ff;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.button:hover {
+  background-color: lightskyblue;
+  color: black;
+}
