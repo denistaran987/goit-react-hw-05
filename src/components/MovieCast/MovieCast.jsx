@@ -7,7 +7,7 @@ import ErrorNotice from '../ErrorNotice/ErrorNotice';
 
 const MovieCast = () => {
   const { movieId } = useParams();
-  const [loader, setLoader] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setIsErorr] = useState(false);
   const [actors, setActors] = useState(null);
 
@@ -21,7 +21,7 @@ const MovieCast = () => {
   useEffect(() => {
     const getMovieActorsInfo = async () => {
       try {
-        setLoader(true);
+        setIsLoading(true);
         setIsErorr(false);
         const info = await fetchMovieActorsInfo(movieId);
         setActors(info);
@@ -29,7 +29,7 @@ const MovieCast = () => {
         setIsErorr(true);
         console.log(error);
       } finally {
-        setLoader(false);
+        setIsLoading(false);
       }
     };
     getMovieActorsInfo();
@@ -58,8 +58,8 @@ const MovieCast = () => {
           })}
         </ul>
       )}
-      {loader && <Loader />}
-      {!loader && actors && actors.length === 0 && (
+      {isLoading && <Loader />}
+      {!isLoading && actors && actors.length === 0 && (
         <p className={s.error}>
           Sorry, no information about the actors was found. Please try again.
         </p>

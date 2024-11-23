@@ -7,13 +7,13 @@ import ErrorNotice from '../components/ErrorNotice/ErrorNotice';
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
-  const [loader, setLoader] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setIsErorr] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       try {
-        setLoader(true);
+        setIsLoading(true);
         setIsErorr(false);
         const { results } = await fetchTrendingMovies();
         setMovies(results);
@@ -21,7 +21,7 @@ const HomePage = () => {
         setIsErorr(true);
         console.log(error);
       } finally {
-        setLoader(false);
+        setIsLoading(false);
       }
     };
     getData();
@@ -32,7 +32,7 @@ const HomePage = () => {
       <div className="container">
         <h1 style={{ fontSize: 30, color: '#527DCC' }}>Trending today</h1>
         {movies && <MovieList movies={movies} />}
-        {loader && <Loader />}
+        {isLoading && <Loader />}
         {error && <ErrorNotice />}
       </div>
     </section>

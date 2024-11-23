@@ -10,7 +10,7 @@ import clsx from 'clsx';
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movieInfo, setMovieInfo] = useState({});
-  const [loader, setLoader] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setIsErorr] = useState(false);
   const { state } = useLocation();
   const goBackLink = useRef(state ?? '/movies');
@@ -22,7 +22,7 @@ const MovieDetailsPage = () => {
   useEffect(() => {
     const getMovieInfo = async () => {
       try {
-        setLoader(true);
+        setIsLoading(true);
         setIsErorr(false);
         const { data } = await fetchMovieInfoById(movieId);
         setMovieInfo(data);
@@ -31,11 +31,15 @@ const MovieDetailsPage = () => {
         setIsErorr(true);
         setMovieInfo(null);
       } finally {
-        setLoader(false);
+        setIsLoading(false);
       }
     };
     getMovieInfo();
   }, [movieId]);
+
+  if (isLoading) {
+    return <Loader />;
+  }
 
   if (!movieInfo) return;
 
@@ -48,51 +52,53 @@ const MovieDetailsPage = () => {
   return (
     <section className="section">
       <div className="container">
-        <div className={s.wrapper}>
-          <Link to={goBackLink.current}>
-            <button className={s.button} type="button">
-              <FaArrowLeftLong />
-              Go Back
-            </button>
-          </Link>
-          <div className={s['left-box']}>
-            <img
-              className={s.image}
-              src={
-                poster_path
-                  ? imageURL
-                  : `https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg`
-              }
-              alt="photo poster"
-            />
-            <nav className={s.nav}>
-              <NavLink className={buildLinkClass} to="cast">
-                Cast
-              </NavLink>
-              <NavLink className={buildLinkClass} to="reviews">
-                Reviews
-              </NavLink>
-            </nav>
+        {movieInfo && (
+          <div className={s.wrapper}>
+            <Link to={goBackLink.current}>
+              <button className={s.button} type="button">
+                <FaArrowLeftLong />
+                Go Back
+              </button>
+            </Link>
+            <div className={s['left-box']}>
+              <img
+                className={s.image}
+                src={
+                  poster_path
+                    ? imageURL
+                    : `https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg`
+                }
+                alt="photo poster"
+              />
+              <nav className={s.nav}>
+                <NavLink className={buildLinkClass} to="cast">
+                  Cast
+                </NavLink>
+                <NavLink className={buildLinkClass} to="reviews">
+                  Reviews
+                </NavLink>
+              </nav>
+            </div>
+            <div className={s['right-box']}>
+              <h1 className={s.title}>{`${title} (${releaseDate})`}</h1>
+              <span className={s.userscore}>{`User score: ${userScore}%`}</span>
+              <p className={s.overview}>{overview}</p>
+              {genres && (
+                <ul className={s['genres-list']}>
+                  {genres.map((genre, index) => (
+                    <li className={s['genres-item']} key={`${genre.name}-${index}`}>
+                      {genre.name}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
           </div>
-          <div className={s['right-box']}>
-            <h1 className={s.title}>{`${title} (${releaseDate})`}</h1>
-            <span className={s.userscore}>{`User score: ${userScore}%`}</span>
-            <p className={s.overview}>{overview}</p>
-            {genres && (
-              <ul className={s['genres-list']}>
-                {genres.map((genre, index) => (
-                  <li className={s['genres-item']} key={`${genre.name}-${index}`}>
-                    {genre.name}
-                  </li>
-                ))}
-              </ul>
-            )}
-          </div>
-        </div>
+        )}
         <Suspense>
           <Outlet />
         </Suspense>
-        {loader && <Loader></Loader>}
+        {isLoading && <Loader />}
         {error && <ErrorNotice />}
       </div>
     </section>

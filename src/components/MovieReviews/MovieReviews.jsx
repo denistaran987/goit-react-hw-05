@@ -7,7 +7,7 @@ import s from './MovieReviews.module.css';
 
 const MovieReviews = () => {
   const { movieId } = useParams();
-  const [loader, setLoader] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setIsErorr] = useState(false);
   const [reviews, setReviews] = useState(null);
 
@@ -21,7 +21,7 @@ const MovieReviews = () => {
   useEffect(() => {
     const getMovieActorsInfo = async () => {
       try {
-        setLoader(true);
+        setIsLoading(true);
         setIsErorr(false);
         const { results } = await fetchMovieReviews(movieId);
         setReviews(results);
@@ -29,7 +29,7 @@ const MovieReviews = () => {
         setIsErorr(true);
         console.log(error);
       } finally {
-        setLoader(false);
+        setIsLoading(false);
       }
     };
     getMovieActorsInfo();
@@ -58,8 +58,8 @@ const MovieReviews = () => {
           })}
         </ul>
       )}
-      {loader && <Loader />}
-      {!loader && reviews && reviews.length === 0 && (
+      {isLoading && <Loader />}
+      {!isLoading && reviews && reviews.length === 0 && (
         <p className={s.error}>Sorry, we couldn&rsquo;t find any reviews.</p>
       )}
       {error && <ErrorNotice />}

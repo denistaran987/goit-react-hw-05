@@ -11,7 +11,7 @@ import ErrorNotice from '../components/ErrorNotice/ErrorNotice';
 const MoviesPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [moviesByQuery, setMovieByQuery] = useState(null);
-  const [loader, setLoader] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [error, setIsErorr] = useState(false);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ const MoviesPage = () => {
 
     const getMovieByQuery = async () => {
       try {
-        setLoader(true);
+        setIsLoading(true);
         setIsErorr(false);
         const { results } = await fetchMovieByQuery(newQuery);
         setMovieByQuery(results);
@@ -30,7 +30,7 @@ const MoviesPage = () => {
         setIsErorr(true);
         console.log(error);
       } finally {
-        setLoader(false);
+        setIsLoading(false);
       }
     };
     getMovieByQuery();
@@ -73,8 +73,8 @@ const MoviesPage = () => {
           </Form>
         </Formik>
         {moviesByQuery && <MovieList movies={moviesByQuery} />}
-        {loader && <Loader />}
-        {!loader && moviesByQuery && moviesByQuery.length === 0 && (
+        {isLoading && <Loader />}
+        {!isLoading && moviesByQuery && moviesByQuery.length === 0 && (
           <p style={{ color: 'red' }}>
             Sorry, no movies found for your search query. Please try again.
           </p>
