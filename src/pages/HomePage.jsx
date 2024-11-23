@@ -1,4 +1,3 @@
-import s from './HomePage.module.css';
 import '../index.css';
 import MovieList from '../components/MovieList/MovieList';
 import { useEffect, useState } from 'react';
@@ -29,9 +28,9 @@ const HomePage = () => {
   }, []);
 
   return (
-    <section className="section">
+    <section style={{ paddingBlock: 24 }}>
       <div className="container">
-        <h1 className={s.title}>Trending today</h1>
+        <h1 style={{ fontSize: 30, color: '#527DCC' }}>Trending today</h1>
         {movies && <MovieList movies={movies} />}
         {loader && <Loader />}
         {error && <ErrorNotice />}

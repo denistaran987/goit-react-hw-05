@@ -1,14 +1,43 @@
+.section {
+  padding-block: 60px;
+}
+
 .list {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  row-gap: 14px;
 }
 
 .item {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  row-gap: 6px;
+  width: 100%;
+  padding: 10px;
+  border: 2px solid lightblue;
+  border-radius: 8px;
+  box-shadow: 0 0 4px 0 lightblue;
 }
 
 .title {
+  color: #6699ff;
 }
 
 .content {
+  width: 100%;
+  padding-bottom: 10px;
+  border-bottom: 1px solid lightgray;
 }
 
-.time {
+.date-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.error {
+  font-size: 20px;
+  color: red;
+  text-align: center;
 }

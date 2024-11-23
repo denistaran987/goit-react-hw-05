@@ -29,17 +29,23 @@ const MovieReviews = () => {
   }, [movieId]);
 
   return (
-    <div className="section">
+    <div className={s.section}>
       {reviews && (
         <ul className={s.list}>
           {reviews.map(review => {
-            const { id, author, content, created_at, updated_ad } = review;
+            const { id, author, content, created_at, updated_at } = review;
             return (
               <li className={s.item} key={id}>
                 <h2 className={s.title}>{author}</h2>
                 <p className={s.content}>{content}</p>
-                <span className={s.time}>{created_at}</span>
-                <span className={s.time}>{updated_ad}</span>
+                <div className={s['date-container']}>
+                  <span className={s.date}>
+                    <strong>Created post:</strong> {created_at}
+                  </span>
+                  <span className={s.date}>
+                    <strong>Update post:</strong> {updated_at}
+                  </span>
+                </div>
               </li>
             );
           })}
@@ -47,7 +53,7 @@ const MovieReviews = () => {
       )}
       {loader && <Loader />}
       {!loader && reviews && reviews.length === 0 && (
-        <p style={{ color: 'red' }}>Sorry, we couldn&rsquo;t find any reviews.</p>
+        <p className={s.error}>Sorry, we couldn&rsquo;t find any reviews.</p>
       )}
       {error && <ErrorNotice />}
     </div>

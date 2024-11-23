@@ -1,3 +1,7 @@
+.section {
+  padding-block: 60px;
+}
+
 .list {
   display: flex;
   justify-content: space-between;
@@ -19,4 +23,10 @@
   width: 300px;
   height: 400px;
   border-radius: 10px;
+}
+
+.error {
+  font-size: 20px;
+  color: red;
+  text-align: center;
 }

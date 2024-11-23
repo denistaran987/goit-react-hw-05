@@ -1,15 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fetchMovieInfoById } from '../services/api';
-import { Link, NavLink, Outlet, useParams } from 'react-router-dom';
+import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
 import Loader from '../components/Loader/Loader';
 import ErrorNotice from '../components/ErrorNotice/ErrorNotice';
 import s from './MoviesDetailsPage.module.css';
+import { FaArrowLeftLong } from 'react-icons/fa6';
+import clsx from 'clsx';
 
 const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movieInfo, setMovieInfo] = useState({});
   const [loader, setLoader] = useState(false);
   const [error, setIsErorr] = useState(false);
+  const { state } = useLocation();
+  const goBackLink = useRef(state ?? '/movies');
+
+  const buildLinkClass = ({ isActive }) => {
+    return clsx(s.link, isActive && s.active);
+  };
 
   useEffect(() => {
     const getMovieInfo = async () => {
@@ -41,13 +49,15 @@ const MovieDetailsPage = () => {
     <section className="section">
       <div className="container">
         <div className={s.wrapper}>
+          <Link to={goBackLink.current}>
+            <button className={s.button} type="button">
+              <FaArrowLeftLong />
+              Go Back
+            </button>
+          </Link>
           <div className={s['left-box']}>
-            <Link className={s.button}>
-              <button type="button">Go Back</button>
-            </Link>
             <img
               className={s.image}
-              style={{ height: '70vh' }}
               src={
                 imageURL
                   ? imageURL
@@ -55,9 +65,17 @@ const MovieDetailsPage = () => {
               }
               alt="photo poster"
             />
+            <nav className={s.nav}>
+              <NavLink className={buildLinkClass} to="cast">
+                Cast
+              </NavLink>
+              <NavLink className={buildLinkClass} to="reviews">
+                Reviews
+              </NavLink>
+            </nav>
           </div>
           <div className={s['right-box']}>
-            <h1 className={title}>{`${title} (${releaseDate})`}</h1>
+            <h1 className={s.title}>{`${title} (${releaseDate})`}</h1>
             <span className={s.userscore}>{`User score: ${userScore}%`}</span>
             <p className={s.overview}>{overview}</p>
             {genres && (
@@ -71,10 +89,6 @@ const MovieDetailsPage = () => {
             )}
           </div>
         </div>
-        <nav>
-          <NavLink to="cast">Cast</NavLink>
-          <NavLink to="reviews">Reviews</NavLink>
-        </nav>
         <Outlet />
         {loader && <Loader></Loader>}
         {error && <ErrorNotice />}

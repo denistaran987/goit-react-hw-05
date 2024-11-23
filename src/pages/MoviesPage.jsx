@@ -15,7 +15,7 @@ const MoviesPage = () => {
   const [error, setIsErorr] = useState(false);
 
   useEffect(() => {
-    const newQuery = searchParams.get('query');
+    const newQuery = searchParams.get('query') ?? null;
 
     if (!newQuery) return;
 
@@ -56,7 +56,7 @@ const MoviesPage = () => {
   });
 
   return (
-    <section className="section">
+    <section className={s.section}>
       <div className="container">
         <Formik
           initialValues={initialValues}

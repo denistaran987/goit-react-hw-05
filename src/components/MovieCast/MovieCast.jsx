@@ -29,7 +29,7 @@ const MovieCast = () => {
   }, [movieId]);
 
   return (
-    <div className="section">
+    <div className={s.section}>
       {actors && (
         <ul className={s.list}>
           {actors.map(({ id, name, character, profile_path }) => {
@@ -53,7 +53,7 @@ const MovieCast = () => {
       )}
       {loader && <Loader />}
       {!loader && actors && actors.length === 0 && (
-        <p style={{ color: 'red' }}>
+        <p className={s.error}>
           Sorry, no information about the actors was found. Please try again.
         </p>
       )}

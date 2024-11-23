@@ -6,7 +6,7 @@ const NotFoundPage = () => {
   return (
     <div className={s.container}>
       <Link className={s.link} to="/">
-        <FaArrowLeftLong style={{}} />
+        <FaArrowLeftLong />
         HomePage
       </Link>
       <h2 className={s.title}>Oops... Page is not found</h2>
