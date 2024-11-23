@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { fetchMovieInfoById } from '../services/api';
 import { Link, NavLink, Outlet, useLocation, useParams } from 'react-router-dom';
+import { FaArrowLeftLong } from 'react-icons/fa6';
 import Loader from '../components/Loader/Loader';
 import ErrorNotice from '../components/ErrorNotice/ErrorNotice';
 import s from './MoviesDetailsPage.module.css';
-import { FaArrowLeftLong } from 'react-icons/fa6';
 import clsx from 'clsx';
 
 const MovieDetailsPage = () => {
@@ -59,7 +59,7 @@ const MovieDetailsPage = () => {
             <img
               className={s.image}
               src={
-                imageURL
+                poster_path
                   ? imageURL
                   : `https://upload.wikimedia.org/wikipedia/commons/6/65/No-Image-Placeholder.svg`
               }
@@ -89,7 +89,9 @@ const MovieDetailsPage = () => {
             )}
           </div>
         </div>
-        <Outlet />
+        <Suspense>
+          <Outlet />
+        </Suspense>
         {loader && <Loader></Loader>}
         {error && <ErrorNotice />}
       </div>

@@ -11,6 +11,13 @@ const MovieCast = () => {
   const [error, setIsErorr] = useState(false);
   const [actors, setActors] = useState(null);
 
+  setTimeout(() => {
+    window.scrollTo({
+      top: 700,
+      behavior: 'smooth',
+    });
+  }, 400);
+
   useEffect(() => {
     const getMovieActorsInfo = async () => {
       try {

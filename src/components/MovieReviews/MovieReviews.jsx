@@ -11,6 +11,13 @@ const MovieReviews = () => {
   const [error, setIsErorr] = useState(false);
   const [reviews, setReviews] = useState(null);
 
+  setTimeout(() => {
+    window.scrollTo({
+      top: 700,
+      behavior: 'smooth',
+    });
+  }, 400);
+
   useEffect(() => {
     const getMovieActorsInfo = async () => {
       try {
