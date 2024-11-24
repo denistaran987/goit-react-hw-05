@@ -1,0 +1,38 @@
+.button {
+  position: fixed;
+  bottom: 20px;
+  right: 10px;
+  padding: 10px;
+  background-color: #e6f7ff;
+  color: #6699ff;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.button svg {
+  width: 40px;
+  height: 40px;
+  transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
+}
+
+.button:hover svg {
+  width: 36px;
+  height: 80px;
+}
+
+@media (max-width: 479.9px) {
+  .button {
+    display: none;
+  }
+}
+
+@media (max-width: 1024px) {
+  .button {
+    padding: 8px;
+  }
+  .button svg {
+    width: 18px;
+    height: 16px;
+  }
+}
