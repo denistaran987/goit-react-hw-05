@@ -43,7 +43,7 @@ const MovieDetailsPage = () => {
 
   if (!movieInfo) return;
 
-  const { title, poster_path, vote_average, overview, release_date, genres } = movieInfo;
+  const { title, poster_path, vote_average, overview, release_date, genres, homepage } = movieInfo;
 
   const imageURL = `https://image.tmdb.org/t/p/w500${poster_path}`;
   const userScore = parseInt(vote_average * 10);
@@ -80,14 +80,21 @@ const MovieDetailsPage = () => {
               </nav>
             </div>
             <div className={s['right-box']}>
-              <h1 className={s.title}>{`${title} (${releaseDate})`}</h1>
+              <div className={s['title-box']}>
+                <h1 className={s.title}>{`${title} (${releaseDate})`}</h1>
+                {homepage && (
+                  <Link className={s.link} to={homepage} target="_blank">
+                    Home Page
+                  </Link>
+                )}
+              </div>
               <span className={s.userscore}>{`User score: ${userScore}%`}</span>
               <p className={s.overview}>{overview}</p>
               {genres && (
                 <ul className={s['genres-list']}>
                   {genres.map((genre, index) => (
                     <li className={s['genres-item']} key={`${genre.name}-${index}`}>
-                      {genre.name}
+                      {genre.name} |
                     </li>
                   ))}
                 </ul>

@@ -2,6 +2,7 @@
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
+  scroll-behavior: smooth;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -19,6 +20,15 @@ body {
   min-height: 100vh;
 }
 
+body::-webkit-scrollbar {
+  width: 10px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: #7aa9ff;
+  border-radius: 6px;
+}
+
 .container {
   width: 100%;
   max-width: 1460px;
@@ -28,7 +38,13 @@ body {
 
 .section {
   position: relative;
-  padding-top: 65px;
+  padding-block: 65px;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-block: 35px;
+  }
 }
 
 table {

@@ -4,19 +4,34 @@ import Loader from '../Loader/Loader';
 import { useParams } from 'react-router-dom';
 import s from './MovieCast.module.css';
 import ErrorNotice from '../ErrorNotice/ErrorNotice';
+import ButtonUp from '../ButtonUp/ButtonUp';
 
 const MovieCast = () => {
   const { movieId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setIsErorr] = useState(false);
   const [actors, setActors] = useState(null);
+  const [buttonUp, setButtonUp] = useState(false);
 
-  setTimeout(() => {
-    window.scrollTo({
-      top: 700,
-      behavior: 'smooth',
-    });
-  }, 400);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.scrollTo({
+        top: 700,
+        behavior: 'smooth',
+      });
+    }, 400);
+
+    const handleScroll = () => {
+      setButtonUp(window.scrollY >= 448);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const getMovieActorsInfo = async () => {
@@ -24,6 +39,7 @@ const MovieCast = () => {
         setIsLoading(true);
         setIsErorr(false);
         const info = await fetchMovieActorsInfo(movieId);
+        console.log(info);
         setActors(info);
       } catch (error) {
         setIsErorr(true);
@@ -37,6 +53,7 @@ const MovieCast = () => {
 
   return (
     <div className={s.section}>
+      {buttonUp && <ButtonUp />}
       {actors && (
         <ul className={s.list}>
           {actors.map(({ id, name, character, profile_path }) => {

@@ -4,6 +4,7 @@
 
 .list {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
 }
@@ -12,6 +13,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 320px;
+  text-align: center;
   border: 2px solid lightblue;
   border-radius: 20px;
   padding: 10px;
@@ -28,4 +31,17 @@
   font-size: 20px;
   color: red;
   text-align: center;
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding-top: 40px;
+    padding-bottom: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  .image {
+    width: 270px;
+  }
 }

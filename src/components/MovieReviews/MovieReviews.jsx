@@ -4,19 +4,34 @@ import { useParams } from 'react-router-dom';
 import ErrorNotice from '../ErrorNotice/ErrorNotice';
 import Loader from '../Loader/Loader';
 import s from './MovieReviews.module.css';
+import ButtonUp from '../ButtonUp/ButtonUp';
 
 const MovieReviews = () => {
   const { movieId } = useParams();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setIsErorr] = useState(false);
   const [reviews, setReviews] = useState(null);
+  const [buttonUp, setButtonUp] = useState(false);
 
-  setTimeout(() => {
-    window.scrollTo({
-      top: 700,
-      behavior: 'smooth',
-    });
-  }, 400);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      window.scrollTo({
+        top: 700,
+        behavior: 'smooth',
+      });
+    }, 400);
+
+    const handleScroll = () => {
+      setButtonUp(window.scrollY >= 448);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      clearTimeout(timer);
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
 
   useEffect(() => {
     const getMovieActorsInfo = async () => {
@@ -37,6 +52,7 @@ const MovieReviews = () => {
 
   return (
     <div className={s.section}>
+      {buttonUp && <ButtonUp />}
       {reviews && (
         <ul className={s.list}>
           {reviews.map(review => {

@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { NavLink } from 'react-router-dom';
 import s from './Navigation.module.css';
+import ButtonChangeTheme from '../ButtonChangeTheme/ButtonChangeTheme';
 
 const Navigation = () => {
   const buildLinkClass = ({ isActive }) => {
@@ -14,6 +15,7 @@ const Navigation = () => {
       <NavLink className={buildLinkClass} to={'/movies'}>
         Movies
       </NavLink>
+      <ButtonChangeTheme />
     </nav>
   );
 };
