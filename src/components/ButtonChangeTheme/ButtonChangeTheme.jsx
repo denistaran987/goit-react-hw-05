@@ -6,6 +6,7 @@ const ButtonChangeTheme = () => {
 
   const handleClick = () => {
     setIsRight(prevState => !prevState);
+    document.body.classList.toggle('dark-theme');
   };
 
   return (

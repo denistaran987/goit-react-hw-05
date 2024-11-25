@@ -17,25 +17,26 @@
   border-radius: 8px;
   border: 1px solid lightgray;
   outline: none;
-  transition: border 0.3s ease-in-out;
+  transition: border 0.2s ease-in-out;
 }
 
 .field:hover {
-  border: 1px solid #6699ff;
+  border: 1px solid var(--main-color);
 }
 
 .button {
   padding-inline: 16px;
   height: 36px;
-  border: none;
-  border-radius: 8px;
-  color: #fff;
-  background-color: #6699ff;
+  color: var(--black-color);
+  background-color: transparent;
+  border: 1px solid var(--main-color);
+  border-radius: 6px;
+  box-shadow: 0 0 4px 1px var(--fourth-color);
   cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .button:hover {
-  background-color: lightskyblue;
-  color: black;
+  color: var(--white-color);
+  background-color: var(--third-color);
 }

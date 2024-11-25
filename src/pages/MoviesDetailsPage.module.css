@@ -8,7 +8,7 @@
 .left-box {
   display: flex;
   flex-direction: column;
-  row-gap: 10px;
+  row-gap: 20px;
 }
 
 .button {
@@ -16,30 +16,29 @@
   align-items: center;
   column-gap: 6px;
   position: absolute;
-  top: 10px;
+  top: 25px;
   left: 10px;
   height: 40px;
-  color: #6699ff;
+  color: var(--black-color);
+  background-color: transparent;
   font-weight: bold;
   text-transform: uppercase;
   padding: 8px 20px;
-  background-color: #e6f7ff;
-  box-shadow: 0 0 4px 4px lightgray;
-  border: none;
+  border: 1px solid var(--main-color);
   border-radius: 6px;
+  box-shadow: 0 0 4px 1px var(--fourth-color);
   cursor: pointer;
-  opacity: 0.8;
-  transition: color 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .button:hover {
-  color: black;
-  opacity: 1;
+  color: var(--white-color);
+  background-color: var(--third-color);
 }
 
 .image {
   width: 350px;
-  height: 500px;
+  height: 470px;
 }
 
 .right-box {
@@ -74,6 +73,17 @@
   max-width: 1000px;
 }
 
+.genres-box {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  column-gap: 10px;
+}
+
+.genres-title {
+  font-size: 18px;
+}
+
 .genres-list {
   display: flex;
   flex-wrap: wrap;
@@ -83,7 +93,7 @@
 .genres-item {
   font-size: 16px;
   font-weight: bold;
-  color: #6699ff;
+  color: var(--main-color);
 }
 
 .nav {
@@ -103,20 +113,20 @@
   color: inherit;
   font-size: 20px;
   text-decoration: none;
-  border: 1px solid #6699ff;
-  box-shadow: 0 0 4px 0 lightblue;
+  border: 1px solid var(--main-color);
+  box-shadow: 0 0 4px 1px var(--fourth-color);
   border-radius: 10px;
-  transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 
 .link:hover {
-  color: #fff;
-  background-color: #7aa9ff;
+  color: var(--white-color);
+  background-color: var(--third-color);
 }
 
 .active {
-  color: #fff;
-  background-color: #7aa9ff;
+  color: var(--white-color);
+  background-color: var(--third-color);
 }
 
 @media (max-width: 768px) {
@@ -136,6 +146,7 @@
   }
 
   .button {
+    top: 18px;
     font-size: 13px;
   }
 

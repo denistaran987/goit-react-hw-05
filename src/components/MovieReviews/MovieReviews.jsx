@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fetchMovieReviews } from '../../services/api';
 import { useParams } from 'react-router-dom';
 import ErrorNotice from '../ErrorNotice/ErrorNotice';
@@ -11,27 +11,14 @@ const MovieReviews = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setIsErorr] = useState(false);
   const [reviews, setReviews] = useState(null);
-  const [buttonUp, setButtonUp] = useState(false);
+
+  const containerRef = useRef();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      window.scrollTo({
-        top: 700,
-        behavior: 'smooth',
-      });
-    }, 400);
-
-    const handleScroll = () => {
-      setButtonUp(window.scrollY >= 448);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    if (!containerRef.current) return;
+    if (!reviews) return;
+    containerRef.current.scrollIntoView({ block: 'start', smooth: 'smooth' });
+  }, [reviews]);
 
   useEffect(() => {
     const getMovieActorsInfo = async () => {
@@ -51,15 +38,16 @@ const MovieReviews = () => {
   }, [movieId]);
 
   return (
-    <div className={s.section}>
-      {buttonUp && <ButtonUp />}
+    <div className={s.section} ref={containerRef}>
+      <ButtonUp />
+      <h2 className={s.title}>Reviews</h2>
       {reviews && (
         <ul className={s.list}>
           {reviews.map(review => {
             const { id, author, content, created_at, updated_at } = review;
             return (
               <li className={s.item} key={id}>
-                <h2 className={s.title}>{author}</h2>
+                <h2 className={s.name}>{author}</h2>
                 <p className={s.content}>{content}</p>
                 <div className={s['date-container']}>
                   <span className={s.date}>

@@ -30,7 +30,7 @@ const HomePage = () => {
   return (
     <section style={{ paddingBlock: 24 }}>
       <div className="container">
-        <h1 style={{ fontSize: 30, color: '#527DCC' }}>Trending today</h1>
+        <h1 style={{ fontSize: 30, color: 'var(--main-color)' }}>Trending today</h1>
         {movies && <MovieList movies={movies} />}
         {isLoading && <Loader />}
         {error && <ErrorNotice />}

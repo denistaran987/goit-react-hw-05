@@ -3,22 +3,23 @@
   bottom: 20px;
   right: 10px;
   padding: 10px;
-  background-color: #e6f7ff;
-  color: #6699ff;
+  background-color: var(--third-color);
+  color: var(--secondary-color);
   border: none;
   border-radius: 50%;
   cursor: pointer;
 }
 
 .button svg {
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 34px;
   transition: height 0.3s ease-in-out, width 0.3s ease-in-out;
 }
 
 .button:hover svg {
   width: 36px;
-  height: 80px;
+  height: 70px;
+  color: var(--fourth-color);
 }
 
 @media (max-width: 479.9px) {

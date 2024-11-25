@@ -8,7 +8,7 @@
 
 @media (hover: hover) {
   .link:hover {
-    color: #6699ff;
+    color: var(--main-color);
     transform: translateX(6px);
   }
 }

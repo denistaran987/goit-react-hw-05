@@ -12,5 +12,5 @@
 }
 
 .active {
-  color: #6699ff;
+  color: var(--main-color);
 }

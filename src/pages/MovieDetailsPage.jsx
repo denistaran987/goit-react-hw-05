@@ -90,15 +90,18 @@ const MovieDetailsPage = () => {
               </div>
               <span className={s.userscore}>{`User score: ${userScore}%`}</span>
               <p className={s.overview}>{overview}</p>
-              {genres && (
-                <ul className={s['genres-list']}>
-                  {genres.map((genre, index) => (
-                    <li className={s['genres-item']} key={`${genre.name}-${index}`}>
-                      {genre.name} |
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <div className={s['genres-box']}>
+                <h2 className={s['genres-title']}>Genres:</h2>
+                {genres && (
+                  <ul className={s['genres-list']}>
+                    {genres.map((genre, index) => (
+                      <li className={s['genres-item']} key={`${genre.name}-${index}`}>
+                        {genre.name} |
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
             </div>
           </div>
         )}

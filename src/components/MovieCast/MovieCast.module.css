@@ -1,5 +1,11 @@
 .section {
-  padding-block: 60px;
+  padding-block: 50px;
+}
+
+.title {
+  font-size: 50px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .list {
@@ -15,10 +21,10 @@
   align-items: center;
   width: 320px;
   text-align: center;
-  border: 2px solid lightblue;
+  border: 2px solid var(--main-color);
   border-radius: 20px;
   padding: 10px;
-  box-shadow: 0 0 4px 0 lightblue;
+  box-shadow: 0 0 4px 0 var(--fourth-color);
 }
 
 .image {
@@ -38,10 +44,18 @@
     padding-top: 40px;
     padding-bottom: 0;
   }
+
+  .title {
+    font-size: 36px;
+  }
 }
 
 @media (max-width: 480px) {
   .image {
     width: 270px;
+  }
+
+  .title {
+    font-size: 26px;
   }
 }

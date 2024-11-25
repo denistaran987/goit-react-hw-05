@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { fetchMovieActorsInfo } from '../../services/api';
 import Loader from '../Loader/Loader';
 import { useParams } from 'react-router-dom';
@@ -11,27 +11,14 @@ const MovieCast = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setIsErorr] = useState(false);
   const [actors, setActors] = useState(null);
-  const [buttonUp, setButtonUp] = useState(false);
+
+  const containerRef = useRef();
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      window.scrollTo({
-        top: 700,
-        behavior: 'smooth',
-      });
-    }, 400);
-
-    const handleScroll = () => {
-      setButtonUp(window.scrollY >= 448);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      clearTimeout(timer);
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
+    if (!containerRef.current) return;
+    if (!actors) return;
+    containerRef.current.scrollIntoView({ block: 'start', smooth: 'smooth' });
+  }, [actors]);
 
   useEffect(() => {
     const getMovieActorsInfo = async () => {
@@ -39,7 +26,6 @@ const MovieCast = () => {
         setIsLoading(true);
         setIsErorr(false);
         const info = await fetchMovieActorsInfo(movieId);
-        console.log(info);
         setActors(info);
       } catch (error) {
         setIsErorr(true);
@@ -52,8 +38,9 @@ const MovieCast = () => {
   }, [movieId]);
 
   return (
-    <div className={s.section}>
-      {buttonUp && <ButtonUp />}
+    <div className={s.section} ref={containerRef}>
+      <ButtonUp />
+      <h2 className={s.title}>Cast</h2>
       {actors && (
         <ul className={s.list}>
           {actors.map(({ id, name, character, profile_path }) => {
