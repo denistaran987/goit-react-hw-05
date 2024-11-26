@@ -1,12 +1,22 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import s from './ButtonChangeTheme.module.css';
 
 const ButtonChangeTheme = () => {
-  const [isRight, setIsRight] = useState(false);
+  const [isRight, setIsRight] = useState(() =>
+    JSON.parse(localStorage.getItem('darktheme') ?? false)
+  );
+
+  useEffect(() => {
+    localStorage.setItem('darktheme', JSON.stringify(isRight));
+    if (isRight) {
+      document.body.classList.add('dark-theme');
+    } else {
+      document.body.classList.remove('dark-theme');
+    }
+  }, [isRight]);
 
   const handleClick = () => {
     setIsRight(prevState => !prevState);
-    document.body.classList.toggle('dark-theme');
   };
 
   return (
